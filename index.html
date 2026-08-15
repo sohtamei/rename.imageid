@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>imageID file renamer</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="tool-surface" aria-labelledby="app-title">
+      <div class="title-row">
+        <div>
+          <p class="eyebrow">JPEG MakerNote tag 0x2043</p>
+          <h1 id="app-title" data-i18n="appTitle">image ID付きファイルコピー作成</h1>
+        </div>
+        <div class="status-pill" id="status-pill">未選択</div>
+      </div>
+
+      <label class="drop-zone" id="drop-zone">
+        <input id="file-input" type="file" accept="image/jpeg,image/heif,image/heic,.jpg,.jpeg,.arw,.hif,.heif,.heic" multiple>
+        <span class="drop-mark" aria-hidden="true">IMG</span>
+        <span class="drop-main" data-i18n="selectFiles">画像ファイルを選択</span>
+        <span class="drop-sub" data-i18n="dropHelp">複数選択、またはここへドラッグ</span>
+      </label>
+
+      <div class="control-row">
+        <label class="field compact-field">
+          <span data-i18n="languageLabel">言語</span>
+          <select id="language-select">
+            <option value="ja" data-i18n="languageJa">日本語</option>
+            <option value="en" data-i18n="languageEn">English</option>
+          </select>
+        </label>
+        <label class="field">
+          <span data-i18n="separatorLabel">区切り文字</span>
+          <input id="separator-input" type="text" value="_" maxlength="8" autocomplete="off">
+        </label>
+        <label class="check">
+          <input id="skip-missing-input" type="checkbox" checked>
+          <span data-i18n="skipMissingLabel">IDがないファイルはZIPに入れない</span>
+        </label>
+        <button id="clear-button" type="button" class="secondary-button" data-i18n="clearButton">クリア</button>
+      </div>
+
+      <div class="summary-grid" aria-live="polite">
+        <div class="metric">
+          <span data-i18n="metricTotal">選択</span>
+          <strong id="metric-total">0</strong>
+        </div>
+        <div class="metric">
+          <span data-i18n="metricReady">ID検出</span>
+          <strong id="metric-ready">0</strong>
+        </div>
+        <div class="metric">
+          <span data-i18n="metricError">エラー</span>
+          <strong id="metric-error">0</strong>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="thOriginal">元ファイル</th>
+              <th>image ID</th>
+              <th data-i18n="thCopy">コピー名</th>
+              <th data-i18n="thStatus">状態</th>
+            </tr>
+          </thead>
+          <tbody id="file-table">
+            <tr class="empty-row">
+              <td colspan="4" data-i18n="emptyMessage">画像ファイルを選択すると解析結果が表示されます。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="action-row">
+        <button id="zip-button" type="button" class="primary-button" disabled data-i18n="createZip">ZIPを作成・保存</button>
+      </div>
+
+      <p class="note" data-i18n="note">
+        画像ファイルは再圧縮しません。Windows/macOS/iOSで保存できないファイル名文字は「_」に置き換えます。
+      </p>
+    </section>
+  </main>
+
+  <script src="./app.js?v=20260815-raw-heif"></script>
+</body>
+</html>
